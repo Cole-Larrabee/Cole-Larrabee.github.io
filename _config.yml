@@ -12,8 +12,8 @@ site-twitter: #if your site has a twitter account, enter it here
 author: Cole Larrabee # add your name
 author-img: cole-larrabee.png # add your photo
 about-author: I'm a Data and Analytics Consultant for Ernst & Young # add description
-#social-twitter: # add your Twitter handle
-#social-facebook: # add your Facebook handle
+social-twitter: _blank # add your Twitter handle
+social-facebook: _blank # add your Facebook handle
 social-github: cole-larrabee
 social-linkedin: cole-larrabee
 social-email: coleman.larrabee@gmail.com
