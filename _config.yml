@@ -11,11 +11,11 @@ site-twitter: #if your site has a twitter account, enter it here
 # Author Settings
 author: Cole Larrabee # add your name
 author-img: david-freeman.jpg # add your photo
-about-author: I'm a Data and Analytics Consultant for Ernst & Young (EY) # add description
+about-author: I'm a Data and Analytics Consultant for Ernst & Young # add description
 social-twitter: # add your Twitter handle
 social-facebook: # add your Facebook handle
 social-github: cole-larrabee
-social-linkedin: www.linkedin.com/in/cole-larrabee
+social-linkedin: cole-larrabee
 social-email: coleman.larrabee@gmail.com
 
 # Disqus
