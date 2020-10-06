@@ -3,7 +3,7 @@ layout: post
 title: Stock Sentiment Analysis
 date: 2017-09-12 13:32:20 +0300
 description: The goal of this analysis was to build a data pipeline using airflow
-img: i-rest.jpg # Add image post (optional)
+img: markus-spiske-5gGcn2PRrtc-unsplash.jpg # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [Holidays, Hawaii]
 ---
