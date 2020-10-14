@@ -9,6 +9,54 @@ tags: [Holidays, Hawaii]
 ---
 One of my interests outside of work is analyzing the stock markets and looking for under-valued or high-upside stocks. Most of the material I read will come from Twitter, blogs, or news sites which really only expresses the views of writers, not the average investor. I figured it would be a fun and interesting challenge to gather data that could be more representative of the public's sentiment on a particular stock. I decided to do this using Reddit's API, Twitter's API, and various news APIs. While I was not overly optimistic in discovering new stocks to buy, I was curious to see if the markets followed the communities (Reddit, Twitter) and vice versa. Are certain communities (ex. subreddits) better tracking the markets than others?
 
+## Step 1: Extract Data From Reddit API
+```python
+def get_data():
+    import praw
+    import pandas as pd
+    from praw.models import MoreComments
+    from datetime import date,timedelta
+
+    reddit = praw.Reddit(client_id = "wSB-cZcDNbyO_w",
+                         client_secret = "0hlWuzbbsO3X4nXCV4ir0wgnWYM",
+                         user_agent = "User-Agent: script:com.example.myredditapp:v1 (by /u/coletrain1)")
+
+    scoring = pd.DataFrame({'source' : [],
+                            'subgroup' : [],
+                           'topic' : [],
+                           'comment' : [],
+                           'score' : []})
+
+    subreddits = ['investing','stocks','stockmarket','options','finance','wallstreetbets']
+
+    for subreddit in subreddits:
+        print(subreddit + ": ")
+        urls = []
+        for submission in reddit.subreddit(subreddit).top(time_filter='day', limit=10):
+            urls.append(submission.url)
+        for topic in urls:
+            try:
+                submission = reddit.submission(url=topic)
+                submission.comments.replace_more(limit=None)
+                i=0
+                for comment in submission.comments.list():
+                    print('comment ' + str(i+1) + " out of " + str(len(submission.comments.list())))
+                    i += 1
+                    if comment.score > 25:
+                        scoring = scoring.append({'source': 'reddit','subgroup' : subreddit,'topic':topic, 
+                                        'comment':comment.body,'score':comment.score},
+                                        ignore_index=True)
+            except:
+                pass
+
+    file = '~/scraped_data_' + str(date.today() - timedelta(days = 1)) + ".csv"
+    scoring.to_csv(file, index = False)
+
+```
+
+
+
+
 ## Plaid ramps kitsch woke pork belly
 90's yr crucifix, selvage 8-bit listicle forage cliche shoreditch hammock microdosing synth. Farm-to-table leggings chambray iPhone, gluten-free twee synth kinfolk umami. Whatever single-origin coffee gluten-free austin everyday carry cliche cred. Plaid ramps kitsch woke pork belly organic. Trust fund whatever coloring book kombucha brooklyn. Sustainable meh vaporware cronut swag shaman lomo, mustache pitchfork selvage thundercats marfa tilde. Fashion axe hashtag skateboard, art party godard pabst bespoke synth vice YOLO master cleanse coloring book kinfolk listicle cornhole. Try-hard mixtape umami fanny pack man bun gastropub franzen tbh. Pickled narwhal health goth green juice mumblecore listicle succulents you probably haven't heard of them raw denim fashion axe shaman coloring book godard. Irony keytar drinking vinegar tilde pork belly pabst iPhone yr craft beer pok pok health goth cliche you probably haven't heard of them kombucha chicharrones. Direct trade hella roof party chia. Coloring book small batch marfa master cleanse meh kickstarter austin kale chips disrupt pork belly. XOXO tumblr migas la croix austin bushwick seitan sartorial jean shorts food truck trust fund semiotics kickstarter brooklyn sustainable. Umami knausgaard mixtape marfa. Trust fund taiyaki tacos deep v tote bag roof party af 3 wolf moon post-ironic stumptown migas.
 
